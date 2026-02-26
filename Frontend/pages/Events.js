@@ -30,7 +30,7 @@ const getEvents = async () => {
       const li = document.createElement("li");
       li.innerHTML = `
         <img src="${
-          event.poster ? 'http://localhost:3000' + event.poster : 'https://via.placeholder.com/150'
+          event.poster ? 'https://proyecto-10-back.onrender.com' + event.poster : 'https://via.placeholder.com/150'
         }" alt="${event.eventName}" width="150"/>
         <h3>${event.eventName}</h3>
         <h4>Fecha: ${new Date(event.date).toLocaleDateString()}</h4>
