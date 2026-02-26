@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000/api/v1";
+const BASE_URL = "https://proyecto-10-back.onrender.com";
 
 export const apiFetch = async (endpoint, options = {}) => {
   const token = localStorage.getItem("token");
