@@ -3,11 +3,7 @@ import Events from "./Events.js";
 
 const CreateEvent = () => {
   const token = localStorage.getItem("token");
-  if (!token) {
-    alert("Debes iniciar sesión para crear un evento");
-    Events();
-    return;
-  }
+
 
   const template = `
     <section id="create-event">
@@ -22,14 +18,19 @@ const CreateEvent = () => {
       </form>
     </section>
   `;
-
   document.querySelector("main").innerHTML = template;
+
+  if (!token) {
+    alert("Debes iniciar sesión para crear un evento");
+
+    document.querySelector("#createEventForm button").disabled = true;
+    return;
+  }
 
   document.querySelector("#createEventForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const form = e.target;
 
-    
     const formData = new FormData();
     formData.append("eventName", form.title.value);
     formData.append("description", form.description.value);
@@ -40,7 +41,7 @@ const CreateEvent = () => {
     try {
       await apiFetch("/events", {
         method: "POST",
-        body: formData, 
+        body: formData,
         auth: true,
       });
 

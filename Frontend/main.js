@@ -28,8 +28,9 @@ const navigate = (page) => {
     default:
       Events();
   }
+  
+  renderNavbar();
 };
-
 
 const handleLogout = () => {
   localStorage.removeItem("token");
@@ -39,24 +40,23 @@ const handleLogout = () => {
   navigate("login");
 };
 
-
 const renderNavbar = () => {
   const header = document.querySelector("header");
   const token = localStorage.getItem("token");
 
   header.innerHTML = `
     <h1>Events App</h1>
-    <a href="#" id="Eventslink">Events</a>
+    <a href="#" id="eventslink">Events</a>
     ${
       token
         ? `<a href="#" id="createlink">Crear Evento</a>
-           <button id="logoutlink">Logout</button>`
+           <a href="#" id="logoutlink">Logout</a>`
         : `<a href="#" id="loginlink">Login</a>
            <a href="#" id="registerlink">Register</a>`
     }
   `;
 
-  document.querySelector("#Eventslink").addEventListener("click", () => navigate("events"));
+  document.querySelector("#eventslink").addEventListener("click", () => navigate("events"));
 
   if (token) {
     document.querySelector("#createlink").addEventListener("click", () => navigate("create"));
@@ -66,7 +66,6 @@ const renderNavbar = () => {
     document.querySelector("#registerlink").addEventListener("click", () => navigate("register"));
   }
 };
-
 
 const init = () => {
   renderNavbar();
